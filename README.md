@@ -19,9 +19,11 @@ Method - POST
 Param - bankAccountNumber, dateFrom, dateTo
 Before trying to get balance first need to import some data because database is runtime(H2)
 If data was found balance will be displayed
+![testing2](https://user-images.githubusercontent.com/70907964/180757335-46c39d80-ff90-47a4-a6cd-c5be75ad0fa7.jpg)
 
 Endpoints - http://localhost:8080/bankSystem/exportFile
 Method - POST
 Param - dateFrom, dateTo
 Before trying to get balance first need to import some data because database is runtime(H2)
 If data was found bank statements will be displayed
+![testing3](https://user-images.githubusercontent.com/70907964/180757599-cd213704-52a5-4eec-b85f-693df539d2ac.png)
