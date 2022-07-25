@@ -5,8 +5,9 @@ spring-boot-starter-data-jpa, spring-boot-starter-web, commons-csv, h2, spring-b
 
 # Testing
 For testing used Postman to create request
+Valide date time format example "27-11-2021 14:00:00"
 
-##############################
+
 Endpoints - http://localhost:8080/bankSystem/uploadFile
 Method - POST
 Param - file (cvs)
