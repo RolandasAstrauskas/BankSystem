@@ -2,9 +2,13 @@ package homework.BankSystem;
 
 import homework.BankSystem.Service.BankAccountStatementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
@@ -15,21 +19,21 @@ public class BankSystemController {
     private BankAccountStatementService bankAccountStatementService;
 
     @PostMapping("/uploadFile")
-    public String uploadBankStatements(@RequestParam("file") MultipartFile file) throws IOException {
+    public String uploadBankStatements(@RequestParam("file") MultipartFile file) {
 
-        bankAccountStatementService.saveBankStatements(file);
-        return "Hello world!";
+        return bankAccountStatementService.saveBankStatements(file);
     }
 
-    @PostMapping("/addBasicBook")
-    public MultipartFile exportBankStatements(@RequestParam String dateFrom, @RequestParam String dateTo){
+    @PostMapping("/exportFile")
+    public String exportBankStatements(@RequestParam(required = false)  String dateFrom, @RequestParam(required = false)  String dateTo, HttpServletResponse servletResponse) throws IOException {
 
-        return bankAccountStatementService.exportBankStatement(dateFrom, dateTo);
+        servletResponse.setContentType("text/csv");
+        servletResponse.addHeader("Content-Disposition","attachment; filename=\"Bank Statements.csv\"");
+        return bankAccountStatementService.exportBankStatement(dateFrom, dateTo, servletResponse.getWriter());
     }
 
     @PostMapping("/getBalance")
-    public double getBankAccountBalance(@RequestParam  String bankAccountNumber, @RequestParam String dateFrom, @RequestParam String dateTo){
-
+    public String getBankAccountBalance(@RequestParam String bankAccountNumber, @RequestParam(required = false)  String dateFrom, @RequestParam(required = false)  String dateTo) {
         return bankAccountStatementService.getBankAccountBalance(bankAccountNumber, dateFrom, dateTo);
     }
 }

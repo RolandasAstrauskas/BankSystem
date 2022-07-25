@@ -1,0 +1,2 @@
+accountNumber,operationDate,beneficiary,comment,currency,amount
+LT151234456798756548,11-28-2022 13:00:00,FirstName LastName,Bills to Pay,USD
